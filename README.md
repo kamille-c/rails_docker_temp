@@ -8,7 +8,7 @@ Things you may want to cover:
 * install image   
 
 ```
-$ docker pull ruby:2.5.0
+$ docker pull ruby:2.5.3
 $ docker pull mysql
 ```
 
@@ -28,17 +28,23 @@ $ docker-compose up
 $ docker-compose run web rails db:create
 ```
 
-* check localhost:3000
-
-* other infomations
+* often use commands
 
 ```
-# stop containers
-$ docker-compose down
+# start rails server
+# this commands let us debug by binding.pry
+$ docker-compose run --rm --service-ports web
 
-# start rails console
-$ docker-compose run web rails dbconsole
+# 基本的に `docker-compose run web bin/rails` 以降に普段使っているrails コマンドを使用すれば動きます
+# generate something
+$ docker-compose run web bin/rails g XXX
 
-# generate something(like controllers, models...)
-$ docker-compose run web rails generate XXX
+# migrate
+$ docker-compose run web bin/rails db:migrate
+
+# run rails console
+$ docker-compose run web bin/rails c
+
+# run rspce
+$ docker-compose run web bin/rspec
 ```
